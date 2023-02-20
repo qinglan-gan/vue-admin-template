@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+
+export function getAllCar() {
+  return request({
+    url: '/car/all',
+    method: 'get'
+  })
+}

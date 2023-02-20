@@ -1,85 +1,73 @@
+//商家管理
 <template>
-  <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="Activity name">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="form.region" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Activity time">
-        <el-col :span="11">
-          <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" />
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-time-picker v-model="form.date2" type="fixed-time" placeholder="Pick a time" style="width: 100%;" />
-        </el-col>
-      </el-form-item>
-      <el-form-item label="Instant delivery">
-        <el-switch v-model="form.delivery" />
-      </el-form-item>
-      <el-form-item label="Activity type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="Online activities" name="type" />
-          <el-checkbox label="Promotion activities" name="type" />
-          <el-checkbox label="Offline activities" name="type" />
-          <el-checkbox label="Simple brand exposure" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="Resources">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="Sponsor" />
-          <el-radio label="Venue" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Activity form">
-        <el-input v-model="form.desc" type="textarea" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
-      </el-form-item>
-    </el-form>
+  <div id>
+    <el-row>
+      <el-col>
+        <el-button
+          type="primary"
+          style="margin-left:900px;margin-top:20px"
+          @click="setVisable(true)"
+        >新增商家</el-button>
+      </el-col>
+    </el-row>
+    <el-row style="margin-top:20px;margin-left:40px">
+      <el-col :span="6">
+        <el-input v-model="businessname" placeholder="商家名称"></el-input>
+      </el-col>
+      <el-col :span="6" style="margin-left:20px">
+        <el-button type="primary">查询</el-button>
+      </el-col>
+    </el-row>
+    <el-table :data="tableData" style="margin-left:40px;margin-top:20px">
+      <el-table-column prop="businessname" label="商家" width="180"></el-table-column>
+      <el-table-column prop="telephone" label="联系电话" width="180"></el-table-column>
+    </el-table>
+
+    <el-dialog title="编辑商家" :visible="dialogVisible">
+      <div>
+        <el-form :model="BusinessContent" :rules="rules">
+          <el-form-item label="商家名称" prop="businessname">
+            <el-input v-model="BusinessContent.businessname"></el-input>
+          </el-form-item>
+          <el-form-item label="联系电话" prop="telephone">
+            <el-input v-model="BusinessContent.telephone"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
-<script>
+<script >
 export default {
+  name: "",
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
-    }
+      dialogVisible: false,
+      businessname: "",
+      tableData: [],
+      BusinessContent: {
+        businessname: "",
+        telephone: ""
+      },
+      rules: {}
+    };
   },
+  components: {},
   methods: {
-    onSubmit() {
-      this.$message('submit!')
+    setVisable(flag) {
+      this.dialogVisible = flag;
     },
-    onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning'
-      })
+    addConfirm() {
+      this.dialogVisible = false;
     }
   }
-}
+};
 </script>
 
-<style scoped>
-.line{
-  text-align: center;
-}
+<style >
 </style>
-
