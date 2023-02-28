@@ -11,6 +11,6 @@ export function save(obj) {
     return request({
         url: '/asserts/save',
         method: 'post',
-        data: obj,
+        data: JSON.stringify(obj),
     })
 }

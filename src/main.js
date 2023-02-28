@@ -15,6 +15,15 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+
+// 引入echarts
+//引入饼状图
+import * as echarts from 'echarts'
+//注册全局
+Vue.prototype.$echarts = echarts
+
+
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

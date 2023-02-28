@@ -1,18 +1,27 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
+     <div ref="containner" style="width:600px;height: 500px">
+
+     </div>
   </div>
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
+
   computed: {
     ...mapGetters([
       'name'
     ])
+  },
+
+  mounted() {
+
   }
 }
 </script>
